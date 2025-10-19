@@ -1,10 +1,13 @@
 import StringParserService from "../src/service/StringParserService.js";
+import ValidationService from "../src/service/ValidationService.js";
 
 describe("StringParserService", () => {
   let parserService;
+  let validationService;
 
   beforeEach(() => {
-    parserService = new StringParserService();
+    validationService = new ValidationService();
+    parserService = new StringParserService(validationService);
   });
 
 

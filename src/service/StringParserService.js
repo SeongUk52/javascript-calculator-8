@@ -1,5 +1,20 @@
 class StringParserService {
+  constructor(validationService) {
+    this.validationService = validationService;
+  }
+
   parseNumbers(input) {
+    // 입력 검증
+    this.validationService.validateInput(input);
+    
+    // 빈 문자열 처리
+    if (input.trim() === "") {
+      return [0];
+    }
+    
+    // 커스텀 구분자 형식 검증
+    this.validationService.validateCustomDelimiterFormat(input);
+    
     // 커스텀 구분자 처리
     if (input.startsWith("//")) {
       return this.parseWithCustomDelimiter(input);
@@ -9,7 +24,12 @@ class StringParserService {
     const numbers = input.split(/[,:]/);
     
     // 문자열을 숫자로 변환
-    return this.convertToNumbers(numbers);
+    const parsedNumbers = this.convertToNumbers(numbers);
+    
+    // 숫자 검증
+    this.validationService.validateNumbers(parsedNumbers);
+    
+    return parsedNumbers;
   }
 
   parseWithCustomDelimiter(input) {

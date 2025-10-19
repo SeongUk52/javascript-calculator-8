@@ -1,12 +1,15 @@
 import CalculatorService from "../src/service/CalculatorService.js";
 import StringParserService from "../src/service/StringParserService.js";
+import ValidationService from "../src/service/ValidationService.js";
 
 describe("CalculatorService", () => {
   let calculatorService;
   let parserService;
+  let validationService;
 
   beforeEach(() => {
-    parserService = new StringParserService();
+    validationService = new ValidationService();
+    parserService = new StringParserService(validationService);
     calculatorService = new CalculatorService(parserService);
   });
 

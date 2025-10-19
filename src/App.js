@@ -1,11 +1,13 @@
 import CalculatorView from "./view/CalculatorView.js";
 import CalculatorService from "./service/CalculatorService.js";
 import StringParserService from "./service/StringParserService.js";
+import ValidationService from "./service/ValidationService.js";
 
 class App {
   constructor() {
     this.view = new CalculatorView();
-    this.parserService = new StringParserService();
+    this.validationService = new ValidationService();
+    this.parserService = new StringParserService(this.validationService);
     this.calculatorService = new CalculatorService(this.parserService);
   }
 
