@@ -2,7 +2,7 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 
 class CalculatorView {
   async getInput() {
-    return await MissionUtils.Console.readLineAsync();
+    return await MissionUtils.Console.readLineAsync("");
   }
 
   printMessage(message) {
