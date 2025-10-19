@@ -115,5 +115,41 @@ describe("ValidationService", () => {
         validationService.validateDelimiters("");
       }).not.toThrow();
     });
+
+    test("숫자와 구분자가 아닌 문자가 포함되면 에러", () => {
+      expect(() => {
+        validationService.validateDelimiters("1,2]3");
+      }).toThrow("[ERROR] 잘못된 구분자입니다.");
+    });
+
+    test("특수문자가 포함되면 에러", () => {
+      expect(() => {
+        validationService.validateDelimiters("1,2@3");
+      }).toThrow("[ERROR] 잘못된 구분자입니다.");
+    });
+
+    test("알파벳이 포함되면 에러", () => {
+      expect(() => {
+        validationService.validateDelimiters("1,2a3");
+      }).toThrow("[ERROR] 잘못된 구분자입니다.");
+    });
+
+    test("커스텀 구분자에서 숫자와 구분자가 아닌 문자가 포함되면 에러", () => {
+      expect(() => {
+        validationService.validateDelimiters("//;\n1;2]3");
+      }).toThrow("[ERROR] 잘못된 구분자입니다.");
+    });
+
+    test("커스텀 구분자에서 특수문자가 포함되면 에러", () => {
+      expect(() => {
+        validationService.validateDelimiters("//;\n1;2@3");
+      }).toThrow("[ERROR] 잘못된 구분자입니다.");
+    });
+
+    test("커스텀 구분자에서 알파벳이 포함되면 에러", () => {
+      expect(() => {
+        validationService.validateDelimiters("//;\n1;2a3");
+      }).toThrow("[ERROR] 잘못된 구분자입니다.");
+    });
   });
 });
