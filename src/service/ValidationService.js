@@ -27,7 +27,9 @@ class ValidationService {
 
   validateCustomDelimiterFormat(input) {
     if (input.startsWith("//")) {
-      const lines = input.split("\n");
+      // \\n을 \n으로 변환하여 처리
+      const normalizedInput = input.replaceAll("\\n", "\n");
+      const lines = normalizedInput.split("\n");
       if (lines.length !== 2) {
         throw new Error("[ERROR] 잘못된 커스텀 구분자 형식입니다.");
       }

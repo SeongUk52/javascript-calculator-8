@@ -34,7 +34,9 @@ class StringParserService {
 
   parseWithCustomDelimiter(input) {
     // "//구분자\n숫자들" 또는 "//구분자1구분자2\n숫자들" 형식 파싱
-    const lines = input.split("\n");
+    // \\n을 \n으로 변환하여 처리
+    const normalizedInput = input.replaceAll("\\n", "\n");
+    const lines = normalizedInput.split("\n");
     if (lines.length !== 2) {
       throw new Error("[ERROR] 잘못된 커스텀 구분자 형식입니다.");
     }

@@ -26,6 +26,7 @@ class App {
       this.view.printResult(result);
     } catch (error) {
       this.view.printError(error.message);
+      throw error; // 에러를 다시 throw하여 테스트에서 catch할 수 있도록
     }
   }
 }
