@@ -26,6 +26,7 @@ describe("StringParserService", () => {
     expect(result).toEqual([1, 2, 3]);
   });
 
+
   test("세미콜론 커스텀 구분자 파싱", () => {
     const result = parserService.parseNumbers("//;\n1;2;3");
     expect(result).toEqual([1, 2, 3]);

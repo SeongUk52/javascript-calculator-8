@@ -84,4 +84,36 @@ describe("ValidationService", () => {
       }).not.toThrow();
     });
   });
+
+  describe("validateDelimiters", () => {
+    test("기본 구분자(쉼표, 콜론)는 통과", () => {
+      expect(() => {
+        validationService.validateDelimiters("1,2,3");
+      }).not.toThrow();
+    });
+
+    test("기본 구분자(쉼표, 콜론) 혼합은 통과", () => {
+      expect(() => {
+        validationService.validateDelimiters("1,2:3");
+      }).not.toThrow();
+    });
+
+    test("세미콜론은 에러", () => {
+      expect(() => {
+        validationService.validateDelimiters("1;2;3");
+      }).toThrow("[ERROR] 잘못된 구분자입니다.");
+    });
+
+    test("커스텀 구분자는 통과", () => {
+      expect(() => {
+        validationService.validateDelimiters("//;\n1;2;3");
+      }).not.toThrow();
+    });
+
+    test("빈 문자열은 통과", () => {
+      expect(() => {
+        validationService.validateDelimiters("");
+      }).not.toThrow();
+    });
+  });
 });

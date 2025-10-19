@@ -35,6 +35,19 @@ class ValidationService {
       }
     }
   }
+
+  validateDelimiters(input) {
+    // 빈 문자열은 통과
+    if (input.trim() === "") {
+      return;
+    }
+    
+    // 기본 구분자(쉼표, 콜론)가 아닌 구분자가 있는지 검증
+    const basicDelimiterPattern = /^[0-9,\s:]+$/;
+    if (!input.startsWith("//") && !basicDelimiterPattern.test(input)) {
+      throw new Error("[ERROR] 잘못된 구분자입니다.");
+    }
+  }
 }
 
 export default ValidationService;

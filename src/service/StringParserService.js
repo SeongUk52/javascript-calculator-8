@@ -15,6 +15,9 @@ class StringParserService {
     // 커스텀 구분자 형식 검증
     this.validationService.validateCustomDelimiterFormat(input);
     
+    // 구분자 검증
+    this.validationService.validateDelimiters(input);
+    
     // 커스텀 구분자 처리
     if (input.startsWith("//")) {
       return this.parseWithCustomDelimiter(input);
